@@ -3,6 +3,7 @@ var win = document.querySelector(".win");
 var lose = document.querySelector(".lose");
 var timerElement = document.querySelector(".timer-count");
 var startButton = document.querySelector(".start-button");
+
 var chosenWord = "";
 var numBlanks = 0;
 var winCounter = 0;
@@ -24,32 +25,66 @@ var words = [
   "boolean",
 ];
 // The initialize function is called when the page loads
-function initialize() {}
+function initialize() { }
+
 // The startGame function is called when the start button is clicked
 function startGame() {
   // Prevents start button from being clicked when round is in progress
-  // if(timer) {
-  //   timerElement.disabled = true;
-  // }
 
-  startButton.addEventListener("click", () => {
-    startButton.disabled = true; 
-    console.log("Init")
-  } )
+  startButton.disabled = true;
+  timerCount = 60;
+  isWin = false;
+
+  startTimer();
+  renderBlanks();
+
+
 }
 // The winGame function is called when the win condition is met
 function winGame() {
-  
+  // You win the game by beating the timer and getting all the letters in the word 
+  winCounter++;
+  startButton.disable = false;
+  setWins();
+  wordBlank.textContent = "Nice Win";
+
 }
 // The loseGame function is called when timer reaches 0
-function loseGame() {}
+function loseGame() {
+  loseCounter++;
+  startButton.disabled = false;
+  setLosses();
+  wordBlank.textContent = "Better luck next time";
+}
 // The setTimer function starts and stops the timer and triggers winGame() and loseGame()
 function startTimer() {
   // Sets timer
-  // Tests if win condition is met
-  // Clears interval and stops timer
-  // Tests if time has run out
-  // Clears interval
+  timer = setInterval(() => {
+    // Decrease the timerCount every second
+    timerCount--;
+    // Reflect the timerCount onto the HTML
+    timerElement.textContent = timerCount;
+
+    // What to do while timerCount is counting down
+    if (timerCount >= 0) {
+      // Tests if win condition is met
+      if (isWin && timerCount > 0) {
+        winGame(); 
+        // Clears interval and stops timer
+        clearInterval(timer); 
+      }
+    } 
+    if (timerCount === 0) {
+      if(!isWin && timerCount <= 0) {
+        loseGame(); 
+        clearInterval(timer); 
+      }
+    }
+    // Tests if time has run out
+    // Clears interval
+
+  }, 1000)
+
 }
 // Creates blanks on screen
 function renderBlanks() {
@@ -58,9 +93,9 @@ function renderBlanks() {
   // Converts blankLetters array into a string and renders it on the screen
 }
 // Updates win count on screen and sets win count to client storage
-function setWins() {}
+function setWins() { }
 // Updates lose count on screen and sets lose count to client storage
-function setLosses() {}
+function setLosses() { }
 // These functions are used by initialize
 //Use localStorage to get the number of wins and get them on the screen
 function getWins() {
@@ -70,12 +105,12 @@ function getWins() {
   //Render win count to page
 }
 //Use localStorage to get the number of losses and get them on the screen
-function getlosses() {}
+function getlosses() { }
 function checkWin() {
   // If the word equals the blankLetters array when converted to string, set isWin to true
 }
 // Tests if guessed letter is in word and renders it to the screen.
-function checkLetters(letter) {}
+function checkLetters(letter) { }
 // Attach event listener to document to listen for key event
 document.addEventListener("keydown", function (event) {
   // If the count is zero, exit function
