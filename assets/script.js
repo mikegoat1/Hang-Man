@@ -69,31 +69,41 @@ function startTimer() {
     if (timerCount >= 0) {
       // Tests if win condition is met
       if (isWin && timerCount > 0) {
-        winGame(); 
+        winGame();
         // Clears interval and stops timer
-        clearInterval(timer); 
-      }
-    } 
-    if (timerCount === 0) {
-      if(!isWin && timerCount <= 0) {
-        loseGame(); 
-        clearInterval(timer); 
+        clearInterval(timer);
       }
     }
     // Tests if time has run out
-    // Clears interval
-
+    if (timerCount === 0) {
+      // Clears interval
+      if (!isWin && timerCount <= 0) {
+        loseGame();
+        clearInterval(timer);
+      }
+    }
   }, 1000)
 
 }
 // Creates blanks on screen
 function renderBlanks() {
   // Randomly picks word from words array
+  chosenWord = words[Math.floor(Math.random() * words.length)]; 
+  // Making an array of chosenword
+  lettersInChosenWord = chosenWord.split("");
+  numBlanks = lettersInChosenWord.length; 
+
   // Uses loop to push blanks to blankLetters array
+  for(let index = 0; index < numBlanks; index++){
+    blanksLetters.push("_"); 
+  }
   // Converts blankLetters array into a string and renders it on the screen
+  wordBlank.textContent = blanksLetters.join(" "); 
 }
 // Updates win count on screen and sets win count to client storage
-function setWins() { }
+function setWins() {
+  
+ }
 // Updates lose count on screen and sets lose count to client storage
 function setLosses() { }
 // These functions are used by initialize
