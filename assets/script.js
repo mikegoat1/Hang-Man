@@ -102,10 +102,14 @@ function renderBlanks() {
 }
 // Updates win count on screen and sets win count to client storage
 function setWins() {
-  
+  win.textContent = winCounter; 
+  localStorage.setItem("winCount",winCounter); 
  }
 // Updates lose count on screen and sets lose count to client storage
-function setLosses() { }
+function setLosses() { 
+  lose.textContent = loseCounter; 
+  localStorage.setItem("loseCounter", loseCounter); 
+}
 // These functions are used by initialize
 //Use localStorage to get the number of wins and get them on the screen
 function getWins() {
