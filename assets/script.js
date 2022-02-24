@@ -88,35 +88,43 @@ function startTimer() {
 // Creates blanks on screen
 function renderBlanks() {
   // Randomly picks word from words array
-  chosenWord = words[Math.floor(Math.random() * words.length)]; 
+  chosenWord = words[Math.floor(Math.random() * words.length)];
   // Making an array of chosenword
   lettersInChosenWord = chosenWord.split("");
-  numBlanks = lettersInChosenWord.length; 
+  numBlanks = lettersInChosenWord.length;
 
   // Uses loop to push blanks to blankLetters array
-  for(let index = 0; index < numBlanks; index++){
-    blanksLetters.push("_"); 
+  for (let index = 0; index < numBlanks; index++) {
+    blanksLetters.push("_");
   }
   // Converts blankLetters array into a string and renders it on the screen
-  wordBlank.textContent = blanksLetters.join(" "); 
+  wordBlank.textContent = blanksLetters.join(" ");
 }
 // Updates win count on screen and sets win count to client storage
 function setWins() {
-  win.textContent = winCounter; 
-  localStorage.setItem("winCount",winCounter); 
- }
+  win.textContent = winCounter;
+  localStorage.setItem("winCount", winCounter);
+}
 // Updates lose count on screen and sets lose count to client storage
-function setLosses() { 
-  lose.textContent = loseCounter; 
-  localStorage.setItem("loseCounter", loseCounter); 
+function setLosses() {
+  lose.textContent = loseCounter;
+  localStorage.setItem("loseCounter", loseCounter);
 }
 // These functions are used by initialize
 //Use localStorage to get the number of wins and get them on the screen
 function getWins() {
   // Get stored value from client storage, if it exists
+  let wins = localStorage.getItem("winCount");
   // If stored value doesn't exist, set counter to 0
+  if (wins === null) {
+    winCounter = 0;
+  } else {
+    winCounter = wins;
+
+  }
   // If a value is retrieved from client storage set the winCounter to that value
   //Render win count to page
+  win.textContent = winCounter;
 }
 //Use localStorage to get the number of losses and get them on the screen
 function getlosses() { }
