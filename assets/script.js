@@ -127,12 +127,41 @@ function getWins() {
   win.textContent = winCounter;
 }
 //Use localStorage to get the number of losses and get them on the screen
-function getlosses() { }
+function getlosses() {
+  let losses = localStorage.getItem("loseCounter");
+  if (losses === null) {
+    loseCounter = 0;
+  } else {
+    loseCounter = losses;
+  }
+  lose.textContent = loseCounter;
+}
 function checkWin() {
   // If the word equals the blankLetters array when converted to string, set isWin to true
+  if (chosenWord === blanksLetters.join("")) {
+    isWin = true;
+  }
 }
 // Tests if guessed letter is in word and renders it to the screen.
-function checkLetters(letter) { }
+function checkLetters(letter) {
+  let letterInWord = false;
+
+  for (let i = 0; i < numBlanks; i++) {
+    if (chosenWord[i] === letter) {
+      letterInWord = true; 
+    }
+  }
+  
+  if (letterInWord) {
+    for (let j=0; j < numBlanks; j ++) {
+      if (chosenWord[j] === letter) {
+        blanksLetter[j] = letter; 
+      }
+    }
+    wordBlank.textContent = blanksLetters.join(" "); 
+  }
+
+}
 // Attach event listener to document to listen for key event
 document.addEventListener("keydown", function (event) {
   // If the count is zero, exit function
