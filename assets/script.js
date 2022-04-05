@@ -164,19 +164,35 @@ function checkLetters(letter) {
 }
 // Attach event listener to document to listen for key event
 document.addEventListener("keydown", function (event) {
+
   // If the count is zero, exit function
+  if (timerCount === 0) {
+    return; 
+  }
   // Convert all keys to lower case
+  let key = event.key.toLowerCase(); 
+  let alphabetNumericCharacters = "abcdefghijklmnopqrstuvwxyz0123456789 ".split(""); 
   // Test if key pushed is letter
+  if (alphabetNumericCharacters.includes(key)) {
+    let letterGuessed = event.key; 
+    checkLetters(letterGuessed)
+    checkWin(); 
+  }
 });
 // Attach event listener to start button to call startGame function on click
 startButton.addEventListener("click", startGame);
 // Calls initialize() so that it fires when page opened
+
 initialize();
 // Bonus: Add reset button
 var resetButton = document.querySelector(".reset-button");
 function resetGame() {
   // Resets win and loss counts
+  winCounter = 0; 
+  loseCounter = 0; 
   // Renders win and loss counts and sets them into client storage
+  setWins(); 
+  setLoses(); 
 }
 // Attaches event listener to button
 resetButton.addEventListener("click", resetGame);
