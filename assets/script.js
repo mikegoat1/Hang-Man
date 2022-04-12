@@ -155,7 +155,7 @@ function checkLetters(letter) {
   if (letterInWord) {
     for (let j=0; j < numBlanks; j ++) {
       if (chosenWord[j] === letter) {
-        blanksLetter[j] = letter; 
+        blanksLetters[j] = letter; 
       }
     }
     wordBlank.textContent = blanksLetters.join(" "); 
@@ -192,7 +192,7 @@ function resetGame() {
   loseCounter = 0; 
   // Renders win and loss counts and sets them into client storage
   setWins(); 
-  setLoses(); 
+  setLosses(); 
 }
 // Attaches event listener to button
 resetButton.addEventListener("click", resetGame);
